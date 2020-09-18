@@ -32,7 +32,11 @@ In another terminal assume the role:
 
 ```aws sts assume-role --role-arn "$(terraform output role)" --role-session-name "test"```
 
+![](docs/terminals.png)
+
 In a few seconds you'll see the event in the first terminal.
+
+![](docs/event.png)
 
 ### Cleanup
 
