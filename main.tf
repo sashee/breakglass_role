@@ -6,6 +6,7 @@ resource "random_id" "id" {
 }
 
 data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "trust_current_account" {
   statement {
@@ -14,6 +15,11 @@ data "aws_iam_policy_document" "trust_current_account" {
     principals {
       type        = "AWS"
       identifiers = [data.aws_caller_identity.current.account_id]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "aws:RequestedRegion"
+      values   = [data.aws_region.current.name]
     }
   }
 }
